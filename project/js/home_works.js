@@ -24,7 +24,7 @@ const parentBlock = document.querySelector('.parent_block');
 let position = 0;
 const parentWidth = parentBlock.offsetWidth;
 const childWidth = childBlock.offsetWidth;
-const speed = 5;
+const speed = 1;
 
 function moveBlock() {
     if (position + childWidth < parentWidth) {
