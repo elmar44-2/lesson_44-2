@@ -45,30 +45,6 @@ const moveBlock = () => {
 
 moveBlock()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let count = 0;
 let intervalId = null;
 
