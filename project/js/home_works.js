@@ -16,23 +16,88 @@ function validateGmail(email) {
     return gmailRegex.test(email)
 }
 
+const parentBlock = document.querySelector('.parent_block')
+const childBlock = document.querySelector('.child_block')
 
-const childBlock = document.querySelector('.child_block');
-const parentBlock = document.querySelector('.parent_block');
+const parentSize = parentBlock.offsetWidth
+const childSize = childBlock.offsetWidth
 
+let currentCorner = 0
+const moveTime = 2000
 
-let position = 0;
-const parentWidth = parentBlock.offsetWidth;
-const childWidth = childBlock.offsetWidth;
-const speed = 1;
+const corners = [
+    { top: 0, left: 0 },
+    { top: 0, left: parentSize - childSize },
+    { top: parentSize - childBlock.offsetHeight, left: parentSize - childSize },
+    { top: parentSize - childBlock.offsetHeight, left: 0 }
+]
 
-function moveBlock() {
-    if (position + childWidth < parentWidth) {
-        position += speed;
-        childBlock.style.left = `${position}px`;
-        requestAnimationFrame(moveBlock);
-    }
+const moveBlock = () => {
+    const corner = corners[currentCorner]
+    childBlock.style.transition = `top ${moveTime / 1000}s, left ${moveTime / 1000}s`
+    childBlock.style.top = `${corner.top}px`
+    childBlock.style.left = `${corner.left}px`
+
+    currentCorner = (currentCorner + 1) % corners.length
+
+    setTimeout(moveBlock, moveTime)
 }
-moveBlock();
+
+moveBlock()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let count = 0;
+let intervalId = null;
+
+const display = document.getElementById('seconds');
+const startButton = document.getElementById('start');
+const stopButton = document.getElementById('stop');
+const resetButton = document.getElementById('reset');
+
+function updateDisplay() {
+    display.textContent = count;
+}
+
+startButton.addEventListener('click', () => {
+    if (!intervalId) {
+        intervalId = setInterval(() => {
+            count++;
+            updateDisplay();
+        }, 1000);
+    }
+});
+
+stopButton.addEventListener('click', () => {
+    clearInterval(intervalId);
+    intervalId = null;
+});
+
+resetButton.addEventListener('click', () => {
+    clearInterval(intervalId);
+    intervalId = null;
+    count = 0;
+    updateDisplay();
+});
