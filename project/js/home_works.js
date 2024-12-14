@@ -42,7 +42,6 @@ const moveBlock = () => {
 
     setTimeout(moveBlock, moveTime)
 }
-
 moveBlock()
 
 let count = 0;
@@ -77,3 +76,13 @@ resetButton.addEventListener('click', () => {
     count = 0;
     updateDisplay();
 });
+
+const slides = document.querySelectorAll('.slide');
+let currentSlide = 0;
+
+setInterval(() => {
+    slides.forEach((slide, index) => {
+        slide.style.transform = `translateX(${(index - currentSlide) * 100}%)`;
+    });
+    currentSlide = (currentSlide + 1) % slides.length;
+}, 3000);

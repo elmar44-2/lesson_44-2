@@ -174,7 +174,7 @@
     z-index: 2;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
-    display: none;
+    display: flex;
 }
 
 .modal_dialog {
