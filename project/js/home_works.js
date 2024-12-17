@@ -86,3 +86,37 @@ setInterval(() => {
     });
     currentSlide = (currentSlide + 1) % slides.length;
 }, 3000);
+
+
+const charactersList = document.querySelector(".characters-list")
+const generateCharactersCards = () => {
+    const request = new XMLHttpRequest()
+    request.open("GET", "../data/persons.json")
+    request.setRequestHeader("Content-type", "application/json")
+    request.send()
+    request.onload = () => {
+        const data = JSON.parse(request.response)
+        data.forEach(person => {
+            const characterCard = document.createElement("div")
+            characterCard.classList.add("character-card")
+            characterCard.innerHTML = `
+            <h2>${person.name}<h2>
+            <h4>age:${person.age}<h4>
+            <img src="${person.photo}" alt="persons"
+             `
+            charactersList.append(characterCard)
+        })
+    }
+}
+generateCharactersCards()
+const xhr = new XMLHttpRequest()
+xhr.open("GET", "../data/any.json")
+xhr.onload = function ()  {
+    if (xhr.status === 200) {
+        const data = JSON.parse(xhr.responseText)
+        console.log(data)
+    } else {
+        console.error("Ошибка", xhr.status,xhr.statusText)
+    }
+}
+xhr.send();
