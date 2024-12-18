@@ -68,3 +68,39 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     setInterval(showNextSlide, 3000);
 });
+// conventer
+const somInput = document.querySelector("#som");
+const usdInput = document.querySelector("#usd");
+const eurInput = document.querySelector("#eur");
+const getExchangeRates = () => {
+    return new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest();
+        request.open("GET", "../data/conventer.json");
+        request.setRequestHeader("Content-type", "application/json");
+        request.send();
+
+        request.onload = () => {
+            if (request.status === 200) {resolve(JSON.parse(request.response));
+            } else {reject("Error loading exchange rates");
+            }
+        };
+    });
+};
+somInput.oninput = () => {
+    getExchangeRates().then((data) => {
+        usdInput.value = (somInput.value / data.usd).toFixed(2);
+        eurInput.value = (somInput.value / data.eur).toFixed(2);
+    });
+};
+usdInput.oninput = () => {
+    getExchangeRates().then((data) => {
+        somInput.value = (usdInput.value * data.usd).toFixed(2);
+        eurInput.value = ((usdInput.value * data.usd) / data.eur).toFixed(2);
+    });
+};
+eurInput.oninput = () => {
+    getExchangeRates().then((data) => {
+        somInput.value = (eurInput.value * data.eur).toFixed(2);
+        usdInput.value = ((eurInput.value * data.eur) / data.usd).toFixed(2);
+    });
+};
