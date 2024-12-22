@@ -104,3 +104,42 @@ eurInput.oninput = () => {
         usdInput.value = ((eurInput.value * data.eur) / data.usd).toFixed(2);
     });
 };
+//card switcher
+const cardBlock = document.querySelector(".card");
+const btnNext = document.querySelector("#btn-next");
+const btnPrev = document.querySelector("#btn-prev");
+
+let cardId = 1;
+const maxCardId = 200;
+
+const updateCard = (id) => {
+    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            const { title, id, completed } = data;
+            cardBlock.innerHTML = `
+                <p>${title}</p>
+            <p>${completed}</p>
+            <span>${id}</span>
+            `;
+        })
+
+};
+updateCard(cardId);
+
+btnNext.onclick = () => {
+    cardId = cardId < maxCardId ? cardId + 1 : 1;
+    updateCard(cardId);
+};
+
+btnPrev.onclick = () => {
+    cardId = cardId > 1 ? cardId - 1 : maxCardId;
+    updateCard(cardId);
+};
+
+fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(response => response.json())
+    .then(posts => {
+        console.log('Posts:', posts);
+    })
+    .catch(error => console.error('Error fetching posts:', error));
