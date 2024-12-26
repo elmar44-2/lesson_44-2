@@ -68,6 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     setInterval(showNextSlide, 3000);
 });
+
+
 // conventer
 const somInput = document.querySelector("#som");
 const usdInput = document.querySelector("#usd");
@@ -104,6 +106,7 @@ eurInput.oninput = () => {
         usdInput.value = ((eurInput.value * data.eur) / data.usd).toFixed(2);
     });
 };
+
 //card switcher
 const cardBlock = document.querySelector(".card");
 const btnNext = document.querySelector("#btn-next");
@@ -143,3 +146,25 @@ fetch('https://jsonplaceholder.typicode.com/posts')
         console.log('Posts:', posts);
     })
     .catch(error => console.error('Error fetching posts:', error));
+//weather
+const searchInput = document.querySelector(".cityName")
+const searchButton = document.querySelector("#search")
+const city = document.querySelector(".city")
+const temp = document.querySelector(".temp")
+
+const API_URL = `http://api.openweathermap.org/data/2.5/weather`
+const API_KEY = `e417df62e04d3b1b111abeab19cea714`
+
+searchButton.onclick = () => {
+    if (searchInput.value === "") {
+        city.innerHTML = "Напишите название города!!!"
+        temp.innerHTML = ""
+        return
+    }
+    fetch(`${API_URL}?q=${searchInput.value}&appid=${API_KEY}&units=metric`)
+        .then(response => response.json())
+        .then(data => {
+            city.innerHTML = data.name || "Такой город не найден..."
+            temp.innerHTML = Math.round(data.main.temp) + "&deg;"
+    })
+}

@@ -1,4 +1,4 @@
-document.getElementById("gmail_button").addEventListener("click", function() {
+document.getElementById("gmail_button").addEventListener("click", function () {
     const emailInput = document.getElementById("gmail_input").value
     const resultDisplay = document.getElementById("gmail_result")
 
@@ -26,10 +26,10 @@ let currentCorner = 0
 const moveTime = 2000
 
 const corners = [
-    { top: 0, left: 0 },
-    { top: 0, left: parentSize - childSize },
-    { top: parentSize - childBlock.offsetHeight, left: parentSize - childSize },
-    { top: parentSize - childBlock.offsetHeight, left: 0 }
+    {top: 0, left: 0},
+    {top: 0, left: parentSize - childSize},
+    {top: parentSize - childBlock.offsetHeight, left: parentSize - childSize},
+    {top: parentSize - childBlock.offsetHeight, left: 0}
 ]
 
 const moveBlock = () => {
@@ -86,7 +86,6 @@ setInterval(() => {
     });
     currentSlide = (currentSlide + 1) % slides.length;
 }, 3000);
-
 
 const charactersList = document.querySelector(".characters-list")
 const generateCharactersCards = () => {
