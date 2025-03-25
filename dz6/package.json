@@ -1,0 +1,20 @@
+{
+  "name": "your-project",
+  "version": "1.0.0",
+  "description": "Описание вашего проекта",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack serve --mode development",
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "dependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0",
+    "webpack-dev-server": "^4.0.0"
+  }
+}
